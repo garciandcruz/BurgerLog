@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">Burger Logger</h1>
+        <img id="burger-header" class="img-responsive center-block" alt="big burger time"
+            src="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjK9fzy_bbgAhUPT6wKHZeGCTAQjRx6BAgBEAU&url=https%3A%2F%2Fwww.elitedaily.com%2Fentertainment%2Fspongebob-krabby-patty-theory-formula%2F2024695&psig=AOvVaw3cEQDdpJgDQLnt5jUaTcza&ust=1550087987719330" />
+        <h4 class="text-center">Are you a burger-lover and need to keep track of it?</h4>
+        <h5 class="text-center">Let SpongeBob help you!</h5>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center">Burgers that are ready</h2>
+            <hr>
+            <ul class="text-center">
+                {{#each burger}}
+                {{#unless this.eaten}}
+                <li>
+                    <h3>{{this.burger_name}}</h3>
+
+                    <form action="/{{this.id}}?_method=PUT" method="POST">
+                        <input type="hidden" name="eaten" value="true">
+                        <button type="submit" class="btn btn-sm btn-primary">Time to eat!</button>
+                    </form>
+
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+            <hr>
+        </div>
+        <div class="col-md-6">
+            <h2 class="text-center">Burgers that have been eaten</h2>
+            <hr>
+            <ul class="text-center">
+                {{#each burger}}
+                {{#if this.eaten}}
+                <li>
+                    <h3>{{this.burger_name}}</h3>
+
+                    <form action="/{{this.id}}?_method=PUT" method="POST">
+                        <input type="hidden" name="eaten" value="false">
+                        <button type="submit" class="btn btn-sm btn-danger">EAT da burger!</button>
+                    </form>
+
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="text-center">Add a Burger</h2>
+    <form class="create-form text-center create-update-form" action="/" method="POST">
+
+        <div class="form-group">
+            <label for="ca">Burger Name:</label>
+            <input type="text" id="ca" name="burger_name">
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-success">Add Burger</button>
+    </form>
+</div>
